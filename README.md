@@ -1,4 +1,8 @@
-<center><img src="icons/translate-button.svg" style="max-width:100%;" width="125" height="125"></center>
+<div align="center">
+  <a href="https://github.com/martgnz/translate-button">
+    <img src="icons/translate-button.svg" width="125" height="125">
+  </a>
+</div>
 
 # translate-button
 
