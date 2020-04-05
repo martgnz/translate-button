@@ -1,8 +1,7 @@
-<div align="center">
+<div align="left">
   <a href="https://github.com/martgnz/translate-button">
     <img src="icons/translate-button.svg" width="125" height="125">
   </a>
-</div>
 
 # translate-button
 
