@@ -11,11 +11,14 @@ Firefox extension to translate a website with only one click.
 
 I frequently end up browsing sites on languages I don't understand. Opening Google Translate each time becomes pretty tiring, so I made this little extension that opens a new tab with the URL prefilled and a full website translation.
 
+## Features
+
+- Support for setting default input and target languages.
+- Support for Google Translate and Bing.
+- Support for opening the translation on a new tab, a background tab or the same page.
+
 ## TODO
 
-- Support for setting default target language (and input, too). Now it is set to translate to English by default. The input language is set to auto-detect.
-- Add support for other translation services (Bing, etc).
-- Support for opening the tab on the background, if desired.
 - Submit to Mozilla Addons.
 
 ## Developing

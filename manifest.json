@@ -2,17 +2,14 @@
   "manifest_version": 2,
   "name": "Translate button",
   "version": "1.0",
-  "description": "Translate a website with only one click using Google Translate",
-  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/bookmark-it",
+  "description": "Translate a website with only one click using Google Translate or Bing",
+  "homepage_url": "https://github.com/martgnz/translate-button",
   "icons": {
     "48": "icons/translate-button.png",
     "96": "icons/translate-button@2x.png"
   },
 
-  "permissions": [
-    "storage",
-    "tabs"
-  ],
+  "permissions": ["storage", "tabs"],
 
   "browser_action": {
     "default_icon": "icons/translate-disabled-38.png",
@@ -32,5 +29,4 @@
       "id": "translate-button@martingonzalez.net"
     }
   }
-
 }
