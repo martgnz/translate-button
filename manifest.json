@@ -10,7 +10,7 @@
   },
 
   "permissions": [
-    "bookmarks",
+    "storage",
     "tabs"
   ],
 
@@ -21,6 +21,16 @@
 
   "background": {
     "scripts": ["background.js"]
+  },
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "translate-button@martingonzalez.net"
+    }
   }
 
 }

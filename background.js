@@ -1,5 +1,5 @@
-var currentTab;
-var currentToTranslate;
+let currentTab;
+let currentToTranslate;
 
 /*
  * Updates the browserAction icon to reflect whether the current page
@@ -16,6 +16,7 @@ function updateIcon() {
     },
     tabId: currentTab.id
   });
+
   browser.browserAction.setTitle({
     // Screen readers can see the title
     title: currentToTranslate ? 'Translate page' : "Can't translate this page",
@@ -24,8 +25,8 @@ function updateIcon() {
 }
 
 function isSupportedProtocol(urlString) {
-  var supportedProtocols = ["https:", "http:"];
-  var url = document.createElement('a');
+  const supportedProtocols = ["https:", "http:"];
+  const url = document.createElement('a');
   url.href = urlString;
   return supportedProtocols.indexOf(url.protocol) != -1;
 }
@@ -37,20 +38,34 @@ function translatePage() {
   // TODO
   // set default source and target language
   // set if tab will load on the background
-  if (currentToTranslate) {
-    browser.tabs.create({
-      url: `https://translate.google.com/translate?sl=auto&tl=en&u=${encodeURI(currentToTranslate.url)}`,
-      active: true
-    });
-  }
-}
+  if (!currentToTranslate) return;
 
+  // get language settings
+  browser.storage.sync.get(null)
+    .catch(err => console.error(err))
+    .then(({translateFrom, translateTo, openPage}) => {
+      const url = `https://translate.google.com/translate?sl=${translateFrom}&tl=${translateTo}&u=${encodeURI(currentToTranslate.url)}`;
+
+      // load on the same page
+      if (openPage === 'same-page') {
+        return browser.tabs.update({ url });
+      }
+
+      // open a new tab
+      browser.tabs.create({
+        url,
+        active: openPage === 'new-tab'
+      });
+    })
+}
 
 /*
  * Update the current URL and check if it can be translated
  */
-function updateActiveTab(tabs) {
-  function updateTab(tabs) {
+function updateActiveTab() {
+  const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+
+  gettingActiveTab.then(tabs => {
     currentTab = tabs[0];
     if (currentTab) {
       if (isSupportedProtocol(currentTab.url)) {
@@ -62,10 +77,7 @@ function updateActiveTab(tabs) {
         console.log(`Cannot translate the current URL.`)
       }
     }
-  }
-
-  var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-  gettingActiveTab.then(updateTab);
+  });
 }
 
 // listen to button click
