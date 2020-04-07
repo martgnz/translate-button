@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      .block:not(:last-child) {
+        margin-top: 1.25em;
+      }
+      .label {
+        display: inline-block;
+        width: 120px;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <style>
-    .block:not(:last-child) {
-      margin-top: 1.25em;
-    }
-    .label {
-      display: inline-block;
-      width: 120px;
-    }
-  </style>
-</head>
+  <body>
+    <div class="block">
+      <div class="label">Translate from</div>
+      <select id="translate-from"></select>
+    </div>
+    <div class="block">
+      <div class="label">Translate to</div>
+      <select id="translate-to"></select>
+    </div>
 
-<body>
-  <div class="block">
-    <div class="label">Translate from</div>
-    <select id="translate-from"></select>
-  </div>
-  <div class="block">
-    <div class="label">Translate to</div>
-    <select id="translate-to"></select>
-  </div>
+    <div class="block">
+      <div class="label">Translate page on</div>
+      <select id="open-page">
+        <option value="newTab">New tab</option>
+        <option value="backgroundTab">Background tab</option>
+        <option value="samePage">Same page</option>
+      </select>
+    </div>
 
-  <div class="block">
-    <div class="label">Translate page on</div>
-    <select id="open-page">
-      <option value="new-tab">New tab</option>
-      <option value="background-tab">Background tab</option>
-      <option value="same-page">Same page</option>
-    </select>
-  </div>
+    <div class="block">
+      <div class="label">Translate using</div>
+      <select id="translation-service">
+        <option value="googleTranslate">Google Translate</option>
+        <option value="bing">Bing</option>
+      </select>
+    </div>
 
-  <script src="options.js"></script>
-
-</body>
-
+    <script src="translation-codes.js"></script>
+    <script src="options.js"></script>
+  </body>
 </html>
