@@ -1,10 +1,8 @@
 let currentTab;
 let currentToTranslate;
 
-/*
- * Updates the browserAction icon to reflect whether the current page
- * can be translated.
- */
+// toggles between filled and disabled icon
+// if the page can or cannot be translated
 function updateIcon() {
   browser.browserAction.setIcon({
     path: currentToTranslate
@@ -26,6 +24,7 @@ function updateIcon() {
   });
 }
 
+// check if url uses HTTP
 function isSupportedProtocol(urlString) {
   const supportedProtocols = ["https:", "http:"];
   const url = document.createElement("a");
@@ -33,6 +32,7 @@ function isSupportedProtocol(urlString) {
   return supportedProtocols.indexOf(url.protocol) != -1;
 }
 
+// build a url for each translation service
 function buildUrl(translationService, translateFrom, translateTo) {
   switch (translationService) {
     case "googleTranslate":
@@ -47,13 +47,8 @@ function buildUrl(translationService, translateFrom, translateTo) {
   }
 }
 
-/*
- * Translate the current page on click
- */
+// translate the page on button click
 function translatePage() {
-  // TODO
-  // set default source and target language
-  // set if tab will load on the background
   if (!currentToTranslate) return;
 
   // get language settings
@@ -79,9 +74,8 @@ function translatePage() {
     });
 }
 
-/*
- * Update the current URL and check if it can be translated
- */
+// gets active tab and checks if it can be translated
+// updates the icon and the global variable
 function updateActiveTab() {
   const gettingActiveTab = browser.tabs.query({
     active: true,
