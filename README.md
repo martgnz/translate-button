@@ -24,8 +24,8 @@ I frequently end up browsing sites on languages I don't understand. Opening Goog
 ## Developing
 
 1. Install the web-ext tool with `npm i -g web-ext`.
-2. Go to `about:debugging` and click on "This Firefox".
-3. Open the manifest.json file of the extension to load it.
-4. Click on "Inspect" and make the window small.
-5. Go to the extension folder with the terminal and run `web-ext run`.
+2. Go to the extension folder with the terminal and run `web-ext run`.
+3. Go to `about:debugging` and click on "This Firefox".
+4. Click on "Load temporary add-on" and open the manifest.json file of the extension
+5. Click on "Inspect" and make the window small.
 6. Now you can do normal browsing and see the logs from the extension on the window you opened previously.
