@@ -3,14 +3,17 @@ const translateToEl = document.querySelector("#translate-to");
 const openPageEl = document.querySelector("#open-page");
 const translationServiceEl = document.querySelector("#translation-service");
 
-function buildDropdown(sel, translationService, filter) {
+function buildDropdown(sel, translationService, value, filter) {
   // recreate the dropdowns
-  languages[translationService].filter(filter).forEach((d) => {
+  languages[translationService.value].filter(filter).forEach((d) => {
     const option = document.createElement("option");
     option.textContent = d.name;
     option.value = d.code;
     sel.appendChild(option);
   });
+
+  // set the value
+  sel.value = value;
 }
 
 function restoreOptions() {
@@ -18,40 +21,86 @@ function restoreOptions() {
   browser.storage.sync
     .get(null)
     .catch((err) => console.log(`Error : ${err}`))
-    .then(({ translateFrom, translateTo, openPage, translationService }) => {
+    .then((options) => {
+      openPageEl.value = options.openPage || defaults.openPage;
+      translationServiceEl.value =
+        options.translationService || defaults.translationService;
+
       // create the dropdowns
-      buildDropdown(translateFromEl, translationService, (d) => true);
+      buildDropdown(
+        translateFromEl,
+        translationServiceEl,
+        options.translateFrom || defaults.translateFrom,
+        (d) => true
+      );
+
       buildDropdown(
         translateToEl,
-        translationService,
+        translationServiceEl,
+        options.translateTo || defaults.translateTo,
         (d) => d.code !== "auto"
       );
 
-      translateFromEl.value = translateFrom || "auto";
-      translateToEl.value = translateTo || "en";
-      openPageEl.value = openPage || "newTab";
-      translationServiceEl.value = translationService || "googleTranslate";
+      // save default options if nothing is set
+      // this happens on first installation
+      // i'm sure there is a better way to do this…
+      if (Object.keys(options).length === 0) {
+        saveOptions();
+      }
     });
 }
 
 function swapLanguages(e) {
-  e.preventDefault();
-
-  // get target service
-  const translationService = document.querySelector("#translation-service")
-    .value;
+  e && e.preventDefault();
 
   // clear both dropdowns
-  // FIXME: try to maintain language code when switching between services
   translateFromEl.innerHTML = "";
   translateToEl.innerHTML = "";
 
-  buildDropdown(translateFromEl, translationService, (d) => true);
-  buildDropdown(translateToEl, translationService, (d) => d.code !== "auto");
+  browser.storage.sync
+    .get(null)
+    .catch((err) => console.log(`Error : ${err}`))
+    .then((options) => {
+      // if the new translation service doesn't support the current language
+      // we fallback to the default language
+      if (
+        !languages[translationServiceEl.value].find(
+          (d) => d.code === options.translateFrom
+        )
+      ) {
+        options.translateFrom = defaults.translateFrom;
+      }
+
+      if (
+        !languages[translationServiceEl.value].find(
+          (d) => d.code === options.translateTo
+        )
+      ) {
+        options.translateTo = defaults.translateTo;
+      }
+
+      // create the dropdowns
+      buildDropdown(
+        translateFromEl,
+        translationServiceEl,
+        options.translateFrom,
+        (d) => true
+      );
+
+      buildDropdown(
+        translateToEl,
+        translationServiceEl,
+        options.translateTo,
+        (d) => d.code !== "auto"
+      );
+
+      // save our new settings
+      saveOptions();
+    });
 }
 
 function saveOptions(e) {
-  e.preventDefault();
+  e && e.preventDefault();
 
   browser.storage.sync.set({
     translateFrom: document.querySelector("#translate-from").value,
@@ -70,10 +119,6 @@ document
 
 document.querySelector("#translate-to").addEventListener("change", saveOptions);
 document.querySelector("#open-page").addEventListener("change", saveOptions);
-
 document
   .querySelector("#translation-service")
-  .addEventListener("change", (e) => {
-    swapLanguages(e);
-    saveOptions(e);
-  });
+  .addEventListener("change", swapLanguages);
