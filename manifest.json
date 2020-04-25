@@ -1,23 +1,23 @@
 {
   "manifest_version": 2,
-  "name": "Translate button",
+  "name": "Translate Button",
   "version": "1.0",
-  "description": "Translate a website with only one click using Google Translate or Bing",
+  "description": "Simple button that opens the current site on Google Translate or Bing.",
   "homepage_url": "https://github.com/martgnz/translate-button",
   "icons": {
     "48": "icons/translate-button.png",
     "96": "icons/translate-button@2x.png"
   },
 
-  "permissions": ["storage", "tabs"],
+  "permissions": ["storage", "activeTab"],
 
   "browser_action": {
-    "default_icon": "icons/translate-disabled-38.png",
+    "default_icon": "icons/translate-button-38.png",
     "default_title": "Translate page"
   },
 
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["defaults.js", "background.js"]
   },
 
   "options_ui": {
