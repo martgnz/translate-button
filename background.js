@@ -38,6 +38,16 @@ function buildUrl(url, translationService, translateFrom, translateTo) {
       return `https://www.translatetheweb.com/?from=${translateFrom.code}&to=${
         translateTo.code
       }&a=${encodeURI(url)}`;
+    case "yandex":
+      const domain = "https://translate.yandex.com/translate";
+
+      // in yandex you can just pass the desired language and it'll autodetect
+      if (translateFrom.code === "auto") {
+        return `${domain}?url=${encodeURI(url)}&lang=${translateTo.code}`;
+      }
+      return `${domain}?url=${encodeURI(url)}&lang=${translateFrom.code}-${
+        translateTo.code
+      }`;
   }
 }
 
