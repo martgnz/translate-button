@@ -7,6 +7,10 @@
 
 Firefox extension to translate a website with only one click.
 
+[Download from Mozilla Addons (recommended)](https://addons.mozilla.org/en-GB/firefox/addon/simple-translate-button/)
+
+[Download from GitHub](https://github.com/martgnz/translate-button/releases/latest)
+
 ## Why?
 
 I frequently end up browsing sites on languages I don't understand. Opening Google Translate each time becomes pretty tiring, so I made this little extension that opens a new tab with the URL prefilled and a full website translation.
