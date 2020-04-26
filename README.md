@@ -18,7 +18,7 @@ I frequently end up browsing sites on languages I don't understand. Opening Goog
 ## Features
 
 - Support for setting default input and target languages.
-- Support for Google Translate and Bing.
+- Support for Google Translate, Bing and Yandex.
 - Support for opening the translation on a new tab, a background tab or the same page.
 
 ## Developing
