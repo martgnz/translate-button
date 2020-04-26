@@ -17,10 +17,6 @@ I frequently end up browsing sites on languages I don't understand. Opening Goog
 - Support for Google Translate and Bing.
 - Support for opening the translation on a new tab, a background tab or the same page.
 
-## TODO
-
-- Submit to Mozilla Addons.
-
 ## Developing
 
 1. Install the web-ext tool with `npm i -g web-ext`.
