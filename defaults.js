@@ -1,7 +1,13 @@
 // list our defaults
 const defaults = {
-  translateFrom: "auto",
-  translateTo: "en",
+  translateFrom: {
+    name: "Auto-detect",
+    code: "auto",
+  },
+  translateTo: {
+    name: "English",
+    code: "en",
+  },
   openPage: "newTab",
   translationService: "googleTranslate",
 };

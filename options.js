@@ -13,7 +13,7 @@ function buildDropdown(sel, translationService, value, filter) {
   });
 
   // set the value
-  sel.value = value;
+  sel.value = value.code;
 }
 
 function restoreOptions() {
@@ -102,11 +102,28 @@ function swapLanguages(e) {
 function saveOptions(e) {
   e && e.preventDefault();
 
+  const translationService = document.querySelector("#translation-service")
+    .value;
+
+  const translateFrom = languages[translationService].find(
+    (d) => d.code === document.querySelector("#translate-from").value
+  );
+
+  const translateTo = languages[translationService].find(
+    (d) => d.code === document.querySelector("#translate-to").value
+  );
+
+  // save our languages
   browser.storage.sync.set({
-    translateFrom: document.querySelector("#translate-from").value,
-    translateTo: document.querySelector("#translate-to").value,
+    translateFrom: translateFrom,
+    translateTo: translateTo,
     openPage: document.querySelector("#open-page").value,
-    translationService: document.querySelector("#translation-service").value,
+    translationService: translationService,
+  });
+
+  // swap title at the end
+  browser.browserAction.setTitle({
+    title: `Translate page: ${translateFrom.name} to ${translateTo.name}`,
   });
 }
 

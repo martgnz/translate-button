@@ -6,10 +6,18 @@ browser.browserAction.setIcon({
   },
 });
 
-// Screen readers can see the title
-browser.browserAction.setTitle({
-  title: "Translate page",
-});
+// title is informative now
+browser.storage.sync
+  .get(null)
+  .catch((err) => console.error(err))
+  .then(({ translateFrom, translateTo }) => {
+    translateFrom = translateFrom || defaults.translateFrom;
+    translateTo = translateTo || defaults.translateTo;
+
+    browser.browserAction.setTitle({
+      title: `Translate page: ${translateFrom.name} to ${translateTo.name}`,
+    });
+  });
 
 // check if url uses HTTP
 function isSupportedProtocol(urlString) {
@@ -23,13 +31,13 @@ function isSupportedProtocol(urlString) {
 function buildUrl(url, translationService, translateFrom, translateTo) {
   switch (translationService) {
     case "googleTranslate":
-      return `https://translate.google.com/translate?sl=${translateFrom}&tl=${translateTo}&u=${encodeURI(
-        url
-      )}`;
+      return `https://translate.google.com/translate?sl=${
+        translateFrom.code
+      }&tl=${translateTo.code}&u=${encodeURI(url)}`;
     case "bing":
-      return `https://www.translatetheweb.com/?from=${translateFrom}&to=${translateTo}&a=${encodeURI(
-        url
-      )}`;
+      return `https://www.translatetheweb.com/?from=${translateFrom.code}&to=${
+        translateTo.code
+      }&a=${encodeURI(url)}`;
   }
 }
 
