@@ -1,0 +1,49 @@
+{
+  "extensionName": {
+    "message": "Translate Button"
+  },
+  "extensionDescription": {
+    "message": "Sencillo botón que abre la página actual en el Traductor de Google, Bing o Yandex."
+  },
+  "toolbarTitle": {
+    "message": "Traducir página: $TRANSLATEFROM$ a $TRANSLATETO$",
+    "placeholders": {
+      "translateFrom": {
+        "content": "$1"
+      },
+      "translateTo": {
+        "content": "$2"
+      }
+    }
+  },
+  "optionTranslateFrom": {
+    "message": "Traducir del"
+  },
+  "optionTranslateTo": {
+    "message": "Traducir al"
+  },
+  "optionOpenTranslation": {
+    "message": "Abrir traducción en"
+  },
+  "optionOpenNewTab": {
+    "message": "Nueva pestaña"
+  },
+  "optionBackgroundTab": {
+    "message": "Pestaña en segundo plano"
+  },
+  "optionSamePage": {
+    "message": "Misma página"
+  },
+  "optionTranslateUsing": {
+    "message": "Traducir con"
+  },
+  "optionGoogleTranslate": {
+    "message": "Traductor de Google"
+  },
+  "optionBing": {
+    "message": "Bing"
+  },
+  "optionYandex": {
+    "message": "Yandex"
+  }
+}

@@ -3,14 +3,32 @@ const translateToEl = document.querySelector("#translate-to");
 const openPageEl = document.querySelector("#open-page");
 const translationServiceEl = document.querySelector("#translation-service");
 
+// there's no easy way to translate option pages
+// https://discourse.mozilla.org/t/translating-options-pages/19604/2
+// https://github.com/erosman/HTML-Internationalization
+for (const node of document.querySelectorAll("[data-i18n]")) {
+  let [text, attr] = node.dataset.i18n.split("|");
+  text = browser.i18n.getMessage(text);
+  attr ? (node[attr] = text) : node.appendChild(document.createTextNode(text));
+}
+
 function buildDropdown(sel, translationService, value, filter) {
   // recreate the dropdowns
-  languages[translationService.value].filter(filter).forEach((d) => {
-    const option = document.createElement("option");
-    option.textContent = d.name;
-    option.value = d.code;
-    sel.appendChild(option);
-  });
+  languages[translationService.value]
+    .filter(filter)
+    .sort((a, b) => {
+      // we want auto to be at the top always
+      if (a.code === "auto") return 0;
+
+      // sort list with our language
+      return a[`name_${BROWSER_LANG}`].localeCompare(b[`name_${BROWSER_LANG}`]);
+    })
+    .forEach((d) => {
+      const option = document.createElement("option");
+      option.textContent = d[`name_${BROWSER_LANG}`];
+      option.value = d.code;
+      sel.appendChild(option);
+    });
 
   // set the value
   sel.value = value.code;
@@ -61,11 +79,19 @@ function swapLanguages(e) {
     .get(null)
     .catch((err) => console.log(`Error : ${err}`))
     .then((options) => {
+      // safeguard if null here
+      if (!options.translateFrom) {
+        options.translateFrom = defaults.translateFrom;
+      }
+      if (!options.translateTo) {
+        options.translateTo = defaults.translateTo;
+      }
+
       // if the new translation service doesn't support the current language
       // we fallback to the default language
       if (
         !languages[translationServiceEl.value].find(
-          (d) => d.code === options.translateFrom
+          (d) => d.code === options.translateFrom.code
         )
       ) {
         options.translateFrom = defaults.translateFrom;
@@ -73,7 +99,7 @@ function swapLanguages(e) {
 
       if (
         !languages[translationServiceEl.value].find(
-          (d) => d.code === options.translateTo
+          (d) => d.code === options.translateTo.code
         )
       ) {
         options.translateTo = defaults.translateTo;
@@ -123,7 +149,10 @@ function saveOptions(e) {
 
   // swap title at the end
   browser.browserAction.setTitle({
-    title: `Translate page: ${translateFrom.name} to ${translateTo.name}`,
+    title: browser.i18n.getMessage("toolbarTitle", [
+      translateFrom[`name_${BROWSER_LANG}`],
+      translateTo[`name_${BROWSER_LANG}`],
+    ]),
   });
 }
 

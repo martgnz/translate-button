@@ -15,7 +15,10 @@ browser.storage.sync
     translateTo = translateTo || defaults.translateTo;
 
     browser.browserAction.setTitle({
-      title: `Translate page: ${translateFrom.name} to ${translateTo.name}`,
+      title: browser.i18n.getMessage("toolbarTitle", [
+        translateFrom[`name_${BROWSER_LANG}`],
+        translateTo[`name_${BROWSER_LANG}`],
+      ]),
     });
   });
 

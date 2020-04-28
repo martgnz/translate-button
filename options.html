@@ -16,32 +16,36 @@
 
   <body>
     <div class="block">
-      <div class="label">Translate from</div>
+      <div class="label" data-i18n="optionTranslateFrom"></div>
       <select id="translate-from"></select>
     </div>
     <div class="block">
-      <div class="label">Translate to</div>
+      <div class="label" data-i18n="optionTranslateTo"></div>
       <select id="translate-to"></select>
     </div>
 
     <div class="block">
-      <div class="label">Open translation on</div>
+      <div class="label" data-i18n="optionOpenTranslation"></div>
       <select id="open-page">
-        <option value="newTab">New tab</option>
-        <option value="backgroundTab">Background tab</option>
-        <option value="samePage">Same page</option>
+        <option value="newTab" data-i18n="optionOpenNewTab"></option>
+        <option value="backgroundTab" data-i18n="optionBackgroundTab"></option>
+        <option value="samePage" data-i18n="optionSamePage"></option>
       </select>
     </div>
 
     <div class="block">
-      <div class="label">Translate using</div>
+      <div class="label" data-i18n="optionTranslateUsing"></div>
       <select id="translation-service">
-        <option value="googleTranslate">Google Translate</option>
-        <option value="bing">Bing</option>
-        <option value="yandex">Yandex</option>
+        <option
+          value="googleTranslate"
+          data-i18n="optionGoogleTranslate"
+        ></option>
+        <option value="bing" data-i18n="optionBing"></option>
+        <option value="yandex" data-i18n="optionYandex"></option>
       </select>
     </div>
 
+    <script src="get-language.js"></script>
     <script src="defaults.js"></script>
     <script src="translation-codes.js"></script>
     <script src="options.js"></script>
