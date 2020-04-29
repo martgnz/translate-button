@@ -6,15 +6,7 @@
     "message": "Botó simple que obre la pàgina actual al Traductor de Google, Bing o al Yandex."
   },
   "toolbarTitle": {
-    "message": "Traduir pàgina de: $TRANSLATEFROM$ al $TRANSLATETO$",
-    "placeholders": {
-      "translateFrom": {
-        "content": "$1"
-      },
-      "translateTo": {
-        "content": "$2"
-      }
-    }
+    "message": "Traduir pàgina"
   },
   "optionTranslateFrom": {
     "message": "Traduir del"

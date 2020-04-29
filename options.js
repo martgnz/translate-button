@@ -149,10 +149,7 @@ function saveOptions(e) {
 
   // swap title at the end
   browser.browserAction.setTitle({
-    title: browser.i18n.getMessage("toolbarTitle", [
-      translateFrom[`name_${BROWSER_LANG}`],
-      translateTo[`name_${BROWSER_LANG}`],
-    ]),
+    title: browser.i18n.getMessage("toolbarTitle"),
   });
 }
 

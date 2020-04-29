@@ -6,15 +6,7 @@
     "message": "Sencillo botón que abre la página actual en el Traductor de Google, Bing o Yandex."
   },
   "toolbarTitle": {
-    "message": "Traducir página: $TRANSLATEFROM$ a $TRANSLATETO$",
-    "placeholders": {
-      "translateFrom": {
-        "content": "$1"
-      },
-      "translateTo": {
-        "content": "$2"
-      }
-    }
+    "message": "Traducir página"
   },
   "optionTranslateFrom": {
     "message": "Traducir del"

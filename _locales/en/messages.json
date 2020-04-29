@@ -6,15 +6,7 @@
     "message": "Simple button that opens the current site on Google Translate, Bing or Yandex."
   },
   "toolbarTitle": {
-    "message": "Translate page: $TRANSLATEFROM$ to $TRANSLATETO$",
-    "placeholders": {
-      "translateFrom": {
-        "content": "$1"
-      },
-      "translateTo": {
-        "content": "$2"
-      }
-    }
+    "message": "Translate page"
   },
   "optionTranslateFrom": {
     "message": "Translate from"
